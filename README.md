@@ -159,7 +159,7 @@ in setup(), the RTC can be reset to the sketch compile time every time the Ardui
 
     > Change Target date to next event -  resets the countdown timer to new target date
 
-    ![alt text](images/countdown_display_003.gif) [alt text]
+    ![alt text](images/countdown_display_003.gif)
 
 #### Future Improvements
 
