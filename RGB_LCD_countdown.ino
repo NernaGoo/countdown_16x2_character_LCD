@@ -507,8 +507,12 @@ void selectButton() {
 }
 
 // --------- MAIN LOOP ---------- //
+int lastSecond = -1;
 void loop() {
-  showCountdown();
+  DateTime now = rtc.now();
+  if (now.second() != lastSecond) {
+    lastSecond = now.second();
+    showCountdown();
+  }
   checkButtons();
-  delay(1000);
 }
