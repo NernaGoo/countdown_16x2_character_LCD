@@ -125,6 +125,9 @@ void setup() {
     rtc.adjust(DateTime(F(__DATE__), F(__TIME__)));
   }
 
+  // Initialize target event
+  initializeTarget();
+
   // Startup Banner
   Serial.println("Countdown Timer!");
   showCurrentTime();
@@ -199,6 +202,49 @@ void showCurrentTime() {
   lcd.print(minute); lcd.print(period);
   delay(displayDelay);
   lcd.clear();
+}
+
+// ----------- INITIAL TARGET EVENT ----------- //
+void initializeTarget() {
+  DateTime now = rtc.now();
+
+  const int64_t ONE_DAY = 24L * 60L * 60L;
+
+  int bestIndex = -1;
+  DateTime bestTarget;
+
+  for (int i = 0; i < NUM_TARGETS; i++) {
+
+    DateTime candidate(
+      targets[i].year,
+      targets[i].month,
+      targets[i].day,
+      targets[i].hour,
+      targets[i].minute,
+      targets[i].second
+    );
+
+    int64_t difference =
+      (int64_t)candidate.unixtime() -
+      (int64_t)now.unixtime();
+
+    // Skip events more than one day in the past
+    if (difference < -ONE_DAY) {
+      continue;
+    }
+
+    // Pick the next earliest event
+    if (bestIndex == -1 ||
+        candidate.unixtime() < bestTarget.unixtime()) {
+      bestIndex = i;
+      bestTarget = candidate;
+    }
+  }
+
+  if (bestIndex != -1) {
+    targetIndex = bestIndex;
+    currentTarget = targets[targetIndex];
+  }
 }
 
 // ----------- CYCLE TARGETS ----------- //
