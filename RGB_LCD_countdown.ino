@@ -58,7 +58,7 @@ Target currentTarget = targets[0]; // assign initial target date
 
 // short names for days and months
 const char* daysOfTheWeek[] = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};   // Sunday = 0
-const char* months[] = {"", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"};
+const char* months[] = {"", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
 
 // fun or frak messages
 const char* fnMessages[] = { 
@@ -193,7 +193,7 @@ void showCurrentTime() {
   lcd.clear();
   lcd.setCursor(0,0);
   lcd.print(dow); lcd.print(" ");
-  lcd.print(months[month]); lcd.print(" "); lcd.print(day); lcd.print(", "); lcd.print(year);
+  lcd.print(months[month]); lcd.print(" "); lcd.print(day); lcd.print(" "); lcd.print(year);
   lcd.setCursor(0,1);
 
   lcd.setCursor(4,1);
